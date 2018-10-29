@@ -7,8 +7,13 @@ Install Docker and Docker Compose.
 ```
 docker-compose up
 ```
-
 Navigate to `http://localhost:8080`
+
+To update image
+
+```
+docker-compose build
+```
 
 ## Requirements
 
