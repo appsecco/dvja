@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dvja:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="dvja-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="dvja:war exploded" />
+    </root>
+  </artifact>
+</component>

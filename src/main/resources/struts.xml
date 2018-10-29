@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="true"/>
+    <!--<constant name="struts.objectFactory.spring.autoWire" value="type"/>-->
+
+    <include file="example.xml"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+        
+        <interceptors>
+            <interceptor name="authenticationInterceptor"
+                         class="com.appsecco.dvja.interceptors.AuthenticationInterceptor"/>
+            
+            <interceptor-stack name="authenticationStack">
+                <interceptor-ref name="authenticationInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-action-ref name="home"/>
+
+        <global-results>
+            <result name="login">/WEB-INF/dvja/Login.jsp</result>
+        </global-results>
+
+        <action name="login" class="com.appsecco.dvja.controllers.Login">
+            <result name="input">/WEB-INF/dvja/Login.jsp</result>
+            <result name="success" type="redirectAction">home</result>
+        </action>
+
+        <action name="logout" class="com.appsecco.dvja.controllers.Login" method="logout">
+            <result type="redirect">
+                <param name="location">/</param>
+            </result>
+        </action>
+
+        <action name="register" class="com.appsecco.dvja.controllers.Register">
+            <result name="input">/WEB-INF/dvja/Registration.jsp</result>
+            <result name="success">/WEB-INF/dvja/RegistrationSuccess.jsp</result>
+        </action>
+
+        <action name="home" class="com.appsecco.dvja.controllers.Home">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/Home.jsp</result>
+        </action>
+
+        <action name="assessmentHome" class="com.appsecco.dvja.controllers.Home" method="assessment">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/AssessmentHome.jsp</result>
+        </action>
+
+        <action name="userSearch" class="com.appsecco.dvja.controllers.UserAction" method="search">
+            <interceptor-ref name="authenticationStack"/>
+            <result name="input">/WEB-INF/dvja/UserSearch.jsp</result>
+            <result>/WEB-INF/dvja/UserSearch.jsp</result>
+        </action>
+
+        <action name="editUser" class="com.appsecco.dvja.controllers.UserAction" method="edit">
+            <interceptor-ref name="authenticationStack"/>
+            <result name="input">/WEB-INF/dvja/UserEdit.jsp</result>
+            <result>/WEB-INF/dvja/Home.jsp</result>
+        </action>
+
+        <action name="ping" class="com.appsecco.dvja.controllers.PingAction">
+            <interceptor-ref name="authenticationStack"/>
+            <result name="input">/WEB-INF/dvja/Ping.jsp</result>
+            <result>/WEB-INF/dvja/Ping.jsp</result>
+        </action>
+
+        <action name="listProduct" class="com.appsecco.dvja.controllers.ProductAction" method="list">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/ProductList.jsp</result>
+        </action>
+
+        <action name="addEditProduct" class="com.appsecco.dvja.controllers.ProductAction">
+            <interceptor-ref name="authenticationStack"/>
+            <result name="input">/WEB-INF/dvja/ProductEdit.jsp</result>
+            <result type="redirectAction">
+                <param name="actionName">listProduct</param>
+            </result>
+        </action>
+
+        <action name="resetPasswordStart" class="com.appsecco.dvja.controllers.ResetPassword" method="requestResetPassword">
+            <result name="input">/WEB-INF/dvja/ResetPasswordStart.jsp</result>
+            <result>/WEB-INF/dvja/ResetPasswordSuccess.jsp</result>
+        </action>
+
+
+        <action name="resetPasswordExecute" class="com.appsecco.dvja.controllers.ResetPassword">
+            <result name="input">/WEB-INF/dvja/ResetPasswordInput.jsp</result>
+            <result type="redirectAction">
+                <param name="actionName">login</param>
+            </result>
+        </action>
+
+        <action name="redirect" class="com.appsecco.dvja.controllers.RedirectAction">
+            <result name="redirect" type="redirect">${url}</result>
+        </action>
+
+        <action name="a1_injection">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a1_injection.jsp</result>
+        </action>
+
+        <action name="a2_broken_auth">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a2_broken_auth.jsp</result>
+        </action>
+
+        <action name="a3_xss">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a3_xss.jsp</result>
+        </action>
+
+        <action name="a4_idor">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a4_idor.jsp</result>
+        </action>
+
+        <action name="a5_security_misconfiguration">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a5_sec_misconf.jsp</result>
+        </action>
+
+        <action name="a6_sensitive_data">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a6_sensitive_data.jsp</result>
+        </action>
+
+        <action name="a7_missing_access_control">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a7_missing_access_control.jsp</result>
+        </action>
+
+        <action name="a8_csrf">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a8_csrf.jsp</result>
+        </action>
+
+        <action name="a9_vuln_component">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a9_vuln_component.jsp</result>
+        </action>
+
+        <action name="a10_redirect">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/a10_redirect.jsp</result>
+        </action>
+
+    </package>
+
+    <package name="api" namespace="/api" extends="struts-default">
+        <action name="ping" class="com.appsecco.dvja.controllers.ApiAction" method="ping"></action>
+        <action name="userList" class="com.appsecco.dvja.controllers.ApiAction" method="adminShowUsers"></action>
+    </package>
+
+    <!-- Add addition packages and configuration here. -->
+</struts>
