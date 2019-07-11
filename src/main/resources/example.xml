@@ -12,7 +12,7 @@
         <default-action-ref name="HelloWorld" />
 
         <action name="HelloWorld" class="com.appsecco.example.HelloWorld">
-            <result>/WEB-INF/example/HelloWorld.jsp</result>
+            <result>/WEB-INF/example/HelloWorld1.jsp</result>
         </action>
 
         <action name="Login_*" method="{1}" class="com.appsecco.example.Login">
