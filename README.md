@@ -20,6 +20,7 @@ docker-compose build
 * Java 1.7+
 * Maven 3.x
 * MySQL Server
+* Another
 
 ## Configuration
 
