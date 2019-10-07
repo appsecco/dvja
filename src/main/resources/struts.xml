@@ -12,7 +12,7 @@
     <package name="default" namespace="/" extends="struts-default">
         
         <interceptors>
-            <interceptor name="authenticationInterceptor"
+            <interceptor name="authenticationInterceptor" afasfd
                          class="com.appsecco.dvja.interceptors.AuthenticationInterceptor"/>
             
             <interceptor-stack name="authenticationStack">
