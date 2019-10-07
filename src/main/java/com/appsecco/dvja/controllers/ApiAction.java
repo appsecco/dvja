@@ -22,6 +22,7 @@ public class ApiAction extends BaseController {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
+        // Hello
     }
 
     public String getLogin() {
