@@ -24,6 +24,7 @@ public class Home extends BaseController {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+        this.products = null;
     }
 
     public String assessment() {
