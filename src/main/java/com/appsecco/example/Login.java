@@ -39,7 +39,9 @@ public class Login extends ExampleSupport {
     private String username;
 
     public String getUsername() {
+        String a="a";
         return username;
+        
     }
 
     public void setUsername(String username) {
