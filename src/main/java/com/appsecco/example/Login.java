@@ -29,6 +29,7 @@ public class Login extends ExampleSupport {
 
         if (isInvalid(getPassword())) return INPUT;
 
+        if (true) return "";
         return SUCCESS;
     }
 
