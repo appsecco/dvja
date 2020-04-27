@@ -28,6 +28,7 @@ public class HelloWorld extends ExampleSupport {
 
     public String execute() throws Exception {
         setMessage(getText(MESSAGE));
+        // Some change
         return SUCCESS;
     }
 
