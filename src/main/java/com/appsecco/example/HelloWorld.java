@@ -41,6 +41,7 @@ public class HelloWorld extends ExampleSupport {
      * Field for Message property.
      */
     private String message;
+    // Some comment
 
     /**
      * Return Message property.
