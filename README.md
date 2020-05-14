@@ -9,7 +9,7 @@ docker-compose up
 ```
 Navigate to `http://localhost:8080`
 
-To update image
+To update images
 
 ```
 docker-compose build
