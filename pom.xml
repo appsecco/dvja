@@ -13,6 +13,11 @@
         <log4j2.version>2.3</log4j2.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.0.5.RELEASE</spring.version>
+
+        <!-- SonarCloud properties for scanning -->
+        <sonar.projectKey>martinbdz_dvja</sonar.projectKey>
+        <sonar.organization>martinbdz</sonar.organization>
+        <sonar.host.url>https://squad-2-core.sc-dev.io</sonar.host.url>
     </properties>
 
     <dependencies>
