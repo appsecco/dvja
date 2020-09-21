@@ -31,3 +31,12 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Checkmarx Scan
+        uses: checkmarx-ts/checkmarx-github-action@v1.0.3
+        with:
+          cxServer: http://d8177e3b2ee4.ngrok.io
+          cxUsername: admin@cx
+          cxPassword: Cx123456!
+          cxTeam: /CxServer/Americas/Engineering/git
+          cxProject: DJVA
+          cxPreset: Highs and Mediums
