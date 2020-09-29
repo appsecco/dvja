@@ -168,12 +168,24 @@
                             <value>com.opensymphony.xwork2.util.logging.log4j2.Log4j2LoggerFactory</value>
                         </systemProperty>
                     </systemProperties>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
                     <webAppSourceDirectory>${basedir}/src/main/webapp/</webAppSourceDirectory>
                     <webAppConfig>
                         <descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
                     </webAppConfig>
                 </configuration>
+            </plugin>
+                        <plugin>
+              <groupId>org.owasp</groupId>
+              <artifactId>dependency-check-maven</artifactId>
+              <version>5.3.2</version>
+              <executions>
+                  <execution>
+                      <goals>
+                          <goal>check</goal>
+                      </goals>
+                  </execution>
+              </executions>
             </plugin>
         </plugins>
     </build>

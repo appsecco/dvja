@@ -10,11 +10,11 @@
     <include file="example.xml"/>
 
     <package name="default" namespace="/" extends="struts-default">
-        
+
         <interceptors>
             <interceptor name="authenticationInterceptor"
                          class="com.appsecco.dvja.interceptors.AuthenticationInterceptor"/>
-            
+
             <interceptor-stack name="authenticationStack">
                 <interceptor-ref name="authenticationInterceptor"/>
                 <interceptor-ref name="defaultStack"/>
@@ -149,6 +149,11 @@
         <action name="a10_redirect">
             <interceptor-ref name="authenticationStack"/>
             <result>/WEB-INF/dvja/a10_redirect.jsp</result>
+        </action>
+
+        <action name="2017_a7_insecure_deserialization">
+            <interceptor-ref name="authenticationStack"/>
+            <result>/WEB-INF/dvja/2017_a7_insecure_deserialization.jsp</result>
         </action>
 
     </package>

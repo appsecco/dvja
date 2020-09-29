@@ -12,8 +12,12 @@ services:
       - mysql
     ports:
       - "8080:8080"
+    volumes:
+      - m2:/root/.m2
+      - .:/app
     environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: ec95c258266b8e985848cae688effa2b
 volumes:
   mysql:
+  m2:
