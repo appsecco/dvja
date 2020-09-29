@@ -25,13 +25,13 @@ jobs:
         snyk monitor --org=${{ secrets.SNYK_ORG_ID }} \
         --project-name=${{ secrets.SNYK_PROJECT_NAME }}
     - run: |
-        snyk test --json-file-output=/tmp/snyk-test-$GITHUB_SHA.json \
+        snyk test --json-file-output=/tmp/snyk-test-${{env.GITHUB_SHA}}.json \
         -p --severity-threshold=high
     - name: Snyk test report
       if: always()
       uses: actions/upload-artifact@v2
       with:
         name: snyk-test-report
-        path: /tmp/snyk-test-$GITHUB_SHA.json
+        path: /tmp/snyk-test-${{env.GITHUB_REF}}
 
 
