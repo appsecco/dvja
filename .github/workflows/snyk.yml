@@ -1,0 +1,36 @@
+name: Snyk Vulnerability Scanner
+
+# Scan all push and PR
+#on: [push, pull_request]
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - run: npm install -g snyk
+    - run: snyk auth ${{ secrets.SNYK_API_TOKEN }}
+    - run: |
+        snyk monitor --org=${{ secrets.SNYK_ORG_ID }} \
+        --project-name=${{ secrets.SNYK_PROJECT_NAME }}
+    - run: |
+        snyk test --json-file-output=/tmp/snyk-test-$GITHUB_SHA.json \
+        -p --severity-threshold=high
+    - name: Snyk test report
+      uses: actions/upload-artifact@v2
+      with:
+        name: snyk-test-report
+        path: /tmp/snyk-test-$GITHUB_SHA.json
+
+
