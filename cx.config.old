@@ -12,7 +12,7 @@
   },
   "additionalProperties" : {
     "cxFlow": {
-      "application": "APPLICATION DVJA",
+      "application": "APPLICATION DVJAA",
       "branches": ["develop", "master", "security"],
       "emails": ["gem.immanuel@checkmarx.com"],
       "bugTracker": "JIRA",
