@@ -1,4 +1,4 @@
-# Damn Vulnerable Java ApplicationA
+# Damn Vulnerable Java Application
 d
 ## Quick Start
 
