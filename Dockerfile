@@ -4,6 +4,7 @@ MAINTAINER Abhisek Datta <abhisek@appsecco.com>
 RUN apt-get update
 RUN apt-get install -y default-mysql-client
 RUN apt-get install -y maven
+RUN apt-get install -y iputils-ping
 
 WORKDIR /app
 COPY pom.xml pom.xml
