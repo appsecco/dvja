@@ -1,5 +1,5 @@
 # Damn Vulnerable Java Application
-Testing PUSH event 12
+Testing PR event 1
 ## Quick Start
 
 Install Docker and Docker Compose.
