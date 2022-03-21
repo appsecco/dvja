@@ -10,6 +10,7 @@ services:
     build: .
     depends_on:
       - mysql
+      - another
     ports:
       - "8080:8080"
     environment:

@@ -22,6 +22,7 @@ public class UserService {
     @PersistenceContext
     public void setEntityManager(EntityManager em) {
         this.entityManager = em;
+        // Test
     }
     public EntityManager getEntityManager() { return this.entityManager; }
 

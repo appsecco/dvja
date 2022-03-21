@@ -26,8 +26,10 @@ package com.appsecco.example;
  */
 public class HelloWorld extends ExampleSupport {
 
+    // A comment
     public String execute() throws Exception {
         setMessage(getText(MESSAGE));
+        // Some change
         return SUCCESS;
     }
 

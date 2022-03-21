@@ -1,5 +1,5 @@
 # Damn Vulnerable Java Application
-
+Testing PR event 2
 ## Quick Start
 
 Install Docker and Docker Compose.
@@ -9,7 +9,7 @@ docker-compose up
 ```
 Navigate to `http://localhost:8080`
 
-To update image
+To update images
 
 ```
 docker-compose build
