@@ -1,21 +1,16 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+node {
+  stage('Clone the Git') {
+    git 'https://github.com/shazforiot/GOL.git'
+  }
+  stage('SonarQube analysis') {
+    def scannerHome = tool 'sq1';
+    withSonarQubeEnv('sq1') {
+      sh "${scannerHome}/bin/sonar-scanner \
+      -D sonar.login=admin \
+      -D sonar.password=i1yCutv4YQti \
+      -D sonar.projectKey=sonar \
+      -D sonar.exclusions=vendor/**,resources/**,**/*.java \
+      -D sonar.host.url=http://165.227.162.194:9000//"
     }
+  }
 }
