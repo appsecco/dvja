@@ -3,8 +3,8 @@ node {
     git branch: 'sonar', url: 'https://github.com/lShoichil/dvja.git'
   }
   stage('SonarQube analysis') {
-    def scannerHome = tool 'sq1';
-    withSonarQubeEnv('sq1') {
+    def scannerHome = tool 'sonarqube';
+    withSonarQubeEnv('sonarqube') {
       sh "${scannerHome}/bin/sonar-scanner \
       -D sonar.login=admin \
       -D sonar.password=i1yCutv4YQti \
