@@ -1,6 +1,6 @@
 node {
   stage('Clone the Git') {
-    git 'https://github.com/shazforiot/GOL.git'
+    git branch: 'sonar', url: 'https://github.com/lShoichil/dvja.git'
   }
   stage('SonarQube analysis') {
     def scannerHome = tool 'sq1';
