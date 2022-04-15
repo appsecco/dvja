@@ -4,7 +4,7 @@ node {
   }
   stage('SonarQube analysis') {
     withSonarQubeEnv(installationName: 'sonarqube') {
-      sh. './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+      sh. './mvnw clean verify sonar:sonar'
     }
   }
 }
