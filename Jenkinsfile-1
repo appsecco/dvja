@@ -3,8 +3,8 @@ node {
     git branch: 'sonar', url: 'https://github.com/lShoichil/dvja.git'
   }
   stage('SonarQube analysis') {
-    withSonarQubeEnv(installationName: 'sonarqube') {
-      sh. './mvnw clean verify sonar:sonar'
+    withSonarQubeEnv(installationName: 's1') {
+      sh. './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
     }
   }
 }
