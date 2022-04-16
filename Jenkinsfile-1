@@ -1,10 +1,22 @@
-node {
-  stage('Clone the Git') {
-    git branch: 'sonar', url: 'https://github.com/lShoichil/dvja.git'
+pipeline {
+  agent { label 'ubunta' }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
   }
-  stage('SonarQube analysis') {
-    withSonarQubeEnv(installationName: 's1') {
-      sh. './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+  stages {
+    stage('Scan') {
+      steps {
+        withSonarQubeEnv(installationName: 'sq1') { 
+          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+        }
+      }
+    }
+    stage("Quality Gate") {
+      steps {
+        timeout(time: 2, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+      }
     }
   }
 }
