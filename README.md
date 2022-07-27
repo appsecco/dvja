@@ -1,6 +1,6 @@
 # Damn Vulnerable Java Application
 
-## Quick Start
+## Quick Start:
 
 Install Docker and Docker Compose.
 
