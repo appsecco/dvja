@@ -55,6 +55,7 @@ public class UserService {
     public List<User> findAllUsers() {
         Query query = entityManager.createQuery("SELECT u FROM User u");
         List<User> resultList = query.getResultList();
+        // unused
 
         return resultList;
     }
