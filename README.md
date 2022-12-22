@@ -39,7 +39,7 @@ Import the schema into MySQL database:
 $ mysql -u USER -pPASSWORD dvja < ./db/schema.sql
 ```
 
-## Build
+## Build..
 
 ```
 $ mvn clean package
