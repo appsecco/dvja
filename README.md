@@ -1,6 +1,6 @@
 # Damn Vulnerable Java Application
 
-## Quick Start
+## Quick Start:
 
 Install Docker and Docker Compose.
 
@@ -39,13 +39,13 @@ Import the schema into MySQL database:
 $ mysql -u USER -pPASSWORD dvja < ./db/schema.sql
 ```
 
-## Build
+## Build..
 
 ```
 $ mvn clean package
 ```
 
-The deployable `war` file is generated in targets directory.
+The deployable `war` file is generated in targets directory..
 
 ## Run with Jetty
 
