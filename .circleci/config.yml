@@ -16,6 +16,10 @@ jobs:
   Build_Maven:
     docker:
       - image: circleci/openjdk:8-jdk
+      
+    environment:
+      JAVA_HOME: /usr/lib/jvm/jdk1.8.0
+    
     steps:
       - checkout 
       - run: mvn clean install
@@ -27,13 +31,10 @@ jobs:
       - snyk/install
       - run:
           command: |
-            sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0/bin/java
-            sudo update-alternatives --set javac /usr/lib/jvm/jdk1.8.0/bin/javac
-
             wget https://archive.apache.org/dist/maven/maven-2/2.2.1/binaries/apache-maven-2.2.1-bin.tar.gz
             tar xf apache-maven-2.2.1-bin.tar.gz
             export PATH="$(pwd)/apache-maven-2.2.1/bin:$PATH"
-            
+
             java -version
             mvn --version
             mvn dependency:tree -DoutputType=dot --batch-mode --non-recursive --file="pom.xml"
