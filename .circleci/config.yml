@@ -15,18 +15,26 @@ workflows:
 jobs:
   Build_Maven:
     docker:
-      - image: cimg/openjdk:17.0
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout 
       - run: mvn clean install
   Snyk_SCA:
     docker:
-      - image: cimg/node:20.2.0
+      - image: cimg/node:lts
     steps:
       - checkout
       - snyk/install
       - run:
-          command: snyk test
+          command: |
+            sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0/bin/java
+            sudo update-alternatives --set javac /usr/lib/jvm/jdk1.8.0/bin/javac
+            export PATH="/opt/apache-maven-3.8.4/bin:$PATH"
+            
+            java -version
+            mvn --version
+            
+            snyk test
           
   Snyk_Code:
     docker:
