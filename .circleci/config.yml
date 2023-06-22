@@ -7,7 +7,7 @@ workflows:
   Build_Maven:
     jobs:
       - build
-     requires:
+          requires:
            - build
   jobs:
    build:
