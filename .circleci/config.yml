@@ -6,8 +6,12 @@ workflows:
   snyk With Maven: 
     jobs:
       - Build_Maven
-      - Snyk_SCA
-      - Snyk_Code
+      - Snyk_SCA:
+          requires:
+           - Build_Maven
+      - Snyk_Code:
+         requires:
+          - Snyk_SCA
 jobs:
   Build_Maven:
     docker:
