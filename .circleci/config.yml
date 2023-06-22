@@ -8,13 +8,12 @@ workflows:
   Snyk_workflow:
     jobs:
       - build_job
+      
   jobs:
   build_job:
     docker:
       - image: circleci/openjdk:8-jdk
-
     steps:
       - checkout
       - run:
-          name: Build
           command: mvn clean install
