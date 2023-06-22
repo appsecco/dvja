@@ -22,7 +22,7 @@ jobs:
       - checkout
       - snyk/install
       - run:
-          command: snyk test || exit 0
+          command: snyk test
           
   Snyk_Code:
     docker:
@@ -31,5 +31,5 @@ jobs:
       - checkout
       - snyk/install
       - run:
-          command: snyk code test || exit 0
+          command: snyk code test
              
