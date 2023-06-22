@@ -9,11 +9,12 @@ workflows:
     jobs:
       - build_job
   jobs:
-    build_job:
+  build_job:
     docker:
-      - image: cimg/openjdk:17.0
+      - image: circleci/openjdk:8-jdk
+
     steps:
-      - checkout 
-      - run: 
-          name: Build with Maven.
+      - checkout
+      - run:
+          name: Build
           command: mvn clean install
