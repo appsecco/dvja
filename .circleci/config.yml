@@ -6,6 +6,7 @@ workflows:
   snyk With Maven: 
     jobs:
       - Build_Maven
+      - Snyk_Code_Install
 jobs:
   Build_Maven:
     docker:
@@ -13,3 +14,13 @@ jobs:
     steps:
       - checkout 
       - run: mvn clean install
+      
+  Snyk_Code_Install:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - run: npm ci
+      - snyk/install
+      - run:
+          command: snyk code test    
