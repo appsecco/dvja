@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  maven: circleci/maven@2.2
+  maven: circleci/maven@1.4.1
   snyk: snyk/snyk@1.7.0
 workflows: 
   snyk With Maven: 
