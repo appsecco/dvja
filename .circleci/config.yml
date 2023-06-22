@@ -3,7 +3,7 @@ orbs:
   maven: circleci/maven@1.4.1
   snyk: snyk/snyk@1.7.0
   
- workflow:
+ workflows:
   Maven build:
     jobs:
      - Build_Maven
