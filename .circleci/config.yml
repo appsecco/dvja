@@ -5,11 +5,11 @@ orbs:
   
 workflows:
   version: 2
-  my_workflow:
+  Snyk_workflow:
     jobs:
       - build_job
   jobs:
-   build_job:
+    build_job:
     docker:
       - image: cimg/openjdk:17.0
     steps:
