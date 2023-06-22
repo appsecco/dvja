@@ -3,13 +3,13 @@ orbs:
   maven: circleci/maven@1.4.1
   snyk: snyk/snyk@1.7.0
 workflows: 
-  build_test: 
+  snyk With Maven: 
     jobs:
-      - maven_build
+      - Build_Maven
 jobs:
-  maven_build:
+  Build_Maven:
     docker:
-      - image: cimg/openjdk:11.0
+      - image: cimg/openjdk:17.0
     steps:
       - checkout 
-      - run: mvn clean package
+      - run: mvn clean install
