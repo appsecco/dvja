@@ -4,12 +4,12 @@ orbs:
   snyk: snyk/snyk@1.7.0
   
 workflows:
- Maven build
- maven Project:
-   jobs:
-     - build
+  version: 2
+  my_workflow:
+    jobs:
+      - build_job
   jobs:
-   build:
+   build_job:
     docker:
       - image: cimg/openjdk:17.0
     steps:
