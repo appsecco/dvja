@@ -4,10 +4,11 @@ orbs:
   snyk: snyk/snyk@1.7.0
   
 workflows:
-  version: 2
   Build_Maven:
     jobs:
       - build
+     requires:
+           - build
   jobs:
    build:
     docker:
