@@ -2,18 +2,14 @@ version: 2.1
 orbs:
   maven: circleci/maven@1.4.1
   snyk: snyk/snyk@1.7.0
-  
-workflows:
-  version: 2
-  Snyk_workflow:
+workflows: 
+  build_test: 
     jobs:
-      - build_job
-      
-  jobs:
-  build_job:
+      - maven_build
+jobs:
+  maven_build:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/openjdk:11.0
     steps:
-      - checkout
-      - run:
-          command: mvn clean install
+      - checkout 
+      - run: mvn clean package
