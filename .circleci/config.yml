@@ -22,4 +22,5 @@ jobs:
       - checkout
       - snyk/install
       - run:
-          command: snyk code test    
+          command: 
+          snyk code test    
