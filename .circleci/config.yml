@@ -14,13 +14,21 @@ jobs:
     steps:
       - checkout 
       - run: mvn clean install
-      
-  Snyk_Code_Install:
+  Snyk_Install:
     docker:
       - image: cimg/node:lts
     steps:
       - checkout
       - snyk/install
       - run:
-          command: snyk code test || true
+          command: snyk test || exit 0
+          
+  Snyk_Install:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - snyk/install
+      - run:
+          command: snyk code test || exit 0
              
