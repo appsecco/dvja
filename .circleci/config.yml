@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  maven: circleci/maven@1.4.1
+  maven: circleci/maven@2.2
   snyk: snyk/snyk@1.7.0
 workflows: 
   snyk With Maven: 
@@ -28,12 +28,6 @@ jobs:
       - snyk/install
       - run:
           command: |
-            wget https://archive.apache.org/dist/maven/maven-2/2.2.1/binaries/apache-maven-2.2.1-bin.tar.gz
-            tar xf apache-maven-2.2.1-bin.tar.gz
-            export PATH="$(pwd)/apache-maven-2.2.1/bin:$PATH"
-
-            java -version
-            mvn --version
             mvn dependency:tree -DoutputType=dot --batch-mode --non-recursive --file="pom.xml"
             snyk test
           
