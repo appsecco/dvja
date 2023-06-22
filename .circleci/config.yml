@@ -28,7 +28,6 @@ jobs:
       - snyk/install
       - run:
           command: |
-            mvn dependency:tree -DoutputType=dot --batch-mode --non-recursive --file="pom.xml"
             snyk test
           
   Snyk_Code:
