@@ -14,7 +14,7 @@ jobs:
     steps:
       - checkout 
       - run: mvn clean install
-  Snyk_Install:
+  Snyk_SCA:
     docker:
       - image: cimg/node:lts
     steps:
@@ -23,7 +23,7 @@ jobs:
       - run:
           command: snyk test || exit 0
           
-  Snyk_Install:
+  Snyk_Code:
     docker:
       - image: cimg/node:lts
     steps:
