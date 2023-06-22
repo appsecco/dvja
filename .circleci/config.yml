@@ -16,9 +16,6 @@ jobs:
   Build_Maven:
     docker:
       - image: circleci/openjdk:8-jdk
-      
-    environment:
-      JAVA_HOME: /usr/lib/jvm/jdk1.8.0
     
     steps:
       - checkout 
