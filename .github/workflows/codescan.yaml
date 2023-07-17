@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo chown -R $USER:$(id -gn) ${{ steps.current-path.outputs.path }}
 
-      - name: Run Docker scanner
+      - name: Running Code scanner
         run: |
           COMMIT_ID=$(git rev-parse HEAD)
           docker run \
