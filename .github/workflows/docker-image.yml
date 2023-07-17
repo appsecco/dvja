@@ -1,0 +1,42 @@
+name: Docker Scanner
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set current path
+        id: current-path
+        run: |
+          echo "::set-output name=path::$(pwd)"
+
+      - name: Log current path and commit ID
+        run: |
+          echo "Current Path: ${{ steps.current-path.outputs.path }}"
+          echo "Commit ID: ${{ github.sha }}"
+
+      - name: List files and folders
+        run: |
+          ls -R ${{ steps.current-path.outputs.path }}
+
+      - name: Fix permissions
+        run: |
+          sudo chown -R $USER:$(id -gn) ${{ steps.current-path.outputs.path }}
+
+      - name: Run Docker scanner
+        run: |
+          COMMIT_ID=$(git rev-parse HEAD)
+          docker run \
+            -v ${{ steps.current-path.outputs.path }}:/tmp/app \
+            rohitcoder/code-security --path /tmp/app \
+            --license-compliance --sast --sca --secret --license-compliance \
+            --policy-url https://raw.githubusercontent.com/rohitcodergroww/cicd-policies/main/policy.yaml \
+            --verbose
