@@ -1,4 +1,4 @@
-name: Docker Scanner
+name: Code Scanner
 
 on:
   push:
@@ -37,6 +37,5 @@ jobs:
           docker run \
             -v ${{ steps.current-path.outputs.path }}:/tmp/app \
             rohitcoder/code-security --path /tmp/app \
-            --license-compliance --sast --sca --secret --license-compliance \
-            --policy-url https://raw.githubusercontent.com/rohitcodergroww/cicd-policies/main/policy.yaml \
+            --sast --sca --secret  \
             --verbose
