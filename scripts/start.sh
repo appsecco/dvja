@@ -7,3 +7,4 @@ mysql -h mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -e "CREATE DATABASE dvja CHARACT
 mysql -h mysql -u $MYSQL_USER -p$MYSQL_PASSWORD dvja < ./db/schema.sql
 
 mvn jetty:run
+ 
