@@ -13,36 +13,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set current path
-        id: current-path
+      - name: Get path at commit
+        id: commit-path
         run: |
-          echo "::set-output name=path::$(pwd)"
+          COMMIT_ID=${{ github.event.pull_request.head.sha }}
+          COMMIT_PATH=$(git rev-parse --show-toplevel)
+          echo "::set-output name=path::$COMMIT_PATH"
 
       - name: Log current path and commit ID
         run: |
-          echo "Current Path: ${{ steps.current-path.outputs.path }}"
-          echo "Commit ID: ${{ github.sha }}"
+          echo "Current Path: ${{ steps.commit-path.outputs.path }}"
+          echo "Commit ID: ${{ github.event.pull_request.head.sha }}"
 
-      - name: List folders in the current path
+      - name: List folders in the commit path
         run: |
-          echo "Listing folders in ${{ steps.current-path.outputs.path }}:"
-          find ${{ steps.current-path.outputs.path }} -type d
-
-      - name: List files from the pull request's head commit
-        run: |
-          echo "Listing files from commit ${{ github.event.pull_request.head.sha }}:"
-          git checkout -f ${{ github.event.pull_request.head.sha }}
-          git ls-files
-
-      - name: Fix permissions
-        run: |
-          sudo chown -R $USER:$(id -gn) ${{ steps.current-path.outputs.path }}
+          echo "Listing folders in ${{ steps.commit-path.outputs.path }}:"
+          find ${{ steps.commit-path.outputs.path }} -type d
 
       - name: Running Code scanner
         run: |
           COMMIT_ID=${{ github.event.pull_request.head.sha }}
           docker run \
-            -v ${{ steps.current-path.outputs.path }}:/tmp/app \
+            -v ${{ steps.commit-path.outputs.path }}:/tmp/app \
             rohitcoder/hela --code-path /tmp/app \
             --sast --sca --secret  \
             --verbose \
