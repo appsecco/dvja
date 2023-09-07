@@ -25,7 +25,14 @@ jobs:
 
       - name: List files and folders
         run: |
-          ls -R ${{ steps.current-path.outputs.path }}
+          echo "Listing folders in ${{ steps.current-path.outputs.path }}:"
+          find ${{ steps.current-path.outputs.path }} -type d
+
+      - name: List files from commit
+        run: |
+          echo "Listing files from commit ${{ github.event.pull_request.head.sha }}:"
+          git checkout -f ${{ github.event.pull_request.head.sha }}
+          git ls-files
 
       - name: Fix permissions
         run: |
