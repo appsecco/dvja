@@ -23,12 +23,12 @@ jobs:
           echo "Current Path: ${{ steps.current-path.outputs.path }}"
           echo "Commit ID: ${{ github.sha }}"
 
-      - name: List files and folders
+      - name: List folders in the current path
         run: |
           echo "Listing folders in ${{ steps.current-path.outputs.path }}:"
           find ${{ steps.current-path.outputs.path }} -type d
 
-      - name: List files from commit
+      - name: List files from the pull request's head commit
         run: |
           echo "Listing files from commit ${{ github.event.pull_request.head.sha }}:"
           git checkout -f ${{ github.event.pull_request.head.sha }}
