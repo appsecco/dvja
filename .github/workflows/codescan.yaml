@@ -1,9 +1,9 @@
-name: Code Scanner
+name: Commit-based Code Scanner
 
 on:
-  push:
+  pull_request:
     branches:
-      - master  # Change this to your main branch name
+      - '*'
 
 jobs:
   scan:
@@ -33,9 +33,10 @@ jobs:
 
       - name: Running Code scanner
         run: |
-          COMMIT_ID=$(git rev-parse HEAD)
+          COMMIT_ID=${{ github.event.pull_request.head.sha }}
           docker run \
             -v ${{ steps.current-path.outputs.path }}:/tmp/app \
-            rohitcoder/code-security --path /tmp/app \
+            rohitcoder/hela --code-path /tmp/app \
             --sast --sca --secret  \
-            --verbose
+            --verbose \
+            --commit-id $COMMIT_ID
