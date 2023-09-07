@@ -37,5 +37,4 @@ jobs:
             -v ${{ steps.commit-path.outputs.path }}:/tmp/app \
             rohitcoder/hela --code-path /tmp/app \
             --sast --sca --secret  \
-            --verbose \
-            --commit-id $COMMIT_ID
+            --verbose
