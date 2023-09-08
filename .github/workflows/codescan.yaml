@@ -1,28 +1,47 @@
-name: Run Docker Command on PR
+name: Commit-based Code Scanner
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
+    branches:
+      - '*'
 
 jobs:
-  build:
+  scan:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        
-      - name: Run Docker Command
+
+      - name: Get path at commit
+        id: commit-path
         run: |
-          docker run --rm rohitcoder/hela \
-            --commit-id dcace5e51c11483d652891fb3146122ba41b891c \
-            --code-path https://github.com/rohitcodergroww/dvja \
-            --secret --sast --sca --verbose
-        env:
-          DOCKER_CLI_ACI: "1"  # Enable the Docker CLI with ACI (Azure Container Instances)
+          COMMIT_ID=${{ github.event.pull_request.head.sha }}
+          COMMIT_PATH=$(git rev-parse --show-toplevel)
+          echo "::set-output name=path::$COMMIT_PATH"
+
+      - name: Log current path and commit ID
+        run: |
+          echo "Current Path: ${{ steps.commit-path.outputs.path }}"
+          echo "Commit ID: ${{ github.event.pull_request.head.sha }}"
+
+      - name: List folders in the commit path
+        run: |
+          echo "Listing folders in ${{ steps.commit-path.outputs.path }}:"
+          find ${{ steps.commit-path.outputs.path }} -type d
+
+      - name: Running Code scanner
+        run: |
+          COMMIT_ID=${{ github.event.pull_request.head.sha }}
+          docker run \
+            -v ${{ steps.commit-path.outputs.path }}:/tmp/app \
+            rohitcoder/hela --code-path /tmp/app \
+            --sast --sca --secret  \
+            --verbose \
+            --commit-id $COMMIT_ID
