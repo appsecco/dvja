@@ -27,6 +27,6 @@ jobs:
           REPO_URL=${{ steps.repo-url.outputs.url }}
           docker run --rm \
             rohitcoder/hela \
-            --commit-id $LATEST_COMMIT_ID \
+            --commit-id dcace5e51c11483d652891fb3146122ba41b891c \
             --code-path $REPO_URL \
             --secret --sast --sca --verbose
