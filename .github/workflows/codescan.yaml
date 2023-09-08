@@ -2,9 +2,6 @@ name: Commit-based Code Scanner
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
     branches:
       - '*'
 
