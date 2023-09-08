@@ -13,27 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set current path
-        id: current-path
-        run: |
-          echo "::set-output name=path::$(pwd)"
-
       - name: Get latest PR Commit ID
         id: latest-commit-id
         run: echo "::set-output name=commit-id::${{ github.event.pull_request.head.sha }}"
 
-      - name: Log current path and commit ID
-        run: |
-          echo "Current Path: ${{ steps.current-path.outputs.path }}"
-          echo "Latest Commit ID: ${{ steps.latest-commit-id.outputs.commit-id }}"
+      - name: Get repository URL
+        id: repo-url
+        run: echo "::set-output name=url::$(git remote get-url origin)"
 
       - name: Running Code scanner
         run: |
-          CURRENT_PATH=${{ steps.current-path.outputs.path }}
           LATEST_COMMIT_ID=${{ steps.latest-commit-id.outputs.commit-id }}
-          docker run \
-            -v $CURRENT_PATH:/tmp/app \
-            rohitcoder/hela --code-path /tmp/app \
-            --sast --sca --secret  \
-            --verbose \
-            --commit-id $LATEST_COMMIT_ID
+          REPO_URL=${{ steps.repo-url.outputs.url }}
+          docker run --rm -it \
+            rohitcoder/hela \
+            --commit-id $LATEST_COMMIT_ID \
+            --code-path $REPO_URL \
+            --secret --sast --sca
