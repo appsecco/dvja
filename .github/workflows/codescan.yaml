@@ -11,17 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Docker
-      uses: docker/setup-buildx-action@v1
-
-    - name: Run Docker Command
-      run: |
-        docker run --rm rohitcoder/hela \
-          --commit-id dcace5e51c11483d652891fb3146122ba41b891c \
-          --code-path https://github.com/rohitcodergroww/dvja \
-          --secret --sast --sca --verbose
-      env:
-        DOCKER_CLI_ACI: "1"  # Enable the Docker CLI with ACI (Azure Container Instances)
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      - name: Run Docker Command
+        run: |
+          docker run --rm rohitcoder/hela \
+            --commit-id dcace5e51c11483d652891fb3146122ba41b891c \
+            --code-path https://github.com/rohitcodergroww/dvja \
+            --secret --sast --sca --verbose
+        env:
+          DOCKER_CLI_ACI: "1"  # Enable the Docker CLI with ACI (Azure Container Instances)
