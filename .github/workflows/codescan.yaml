@@ -29,4 +29,4 @@ jobs:
             rohitcoder/hela \
             --commit-id $LATEST_COMMIT_ID \
             --code-path $REPO_URL \
-            --secret --sast --sca
+            --secret --sast --sca --verbose
