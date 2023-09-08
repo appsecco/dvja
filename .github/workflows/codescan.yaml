@@ -1,4 +1,4 @@
-name: Commit-based Code Scanner
+name: PR Based code Scanner
 
 on:
   pull_request:
@@ -13,28 +13,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get path at commit
-        id: commit-path
+      - name: Get latest PR Commit ID
+        id: latest-commit-id
+        run: echo "::set-output name=commit-id::${{ github.event.pull_request.head.sha }}"
+
+      - name: Create a folder for latest code
+        run: mkdir -p latest_code
+
+      - name: Copy modified files to latest code folder
         run: |
-          COMMIT_ID=${{ github.event.pull_request.head.sha }}
-          COMMIT_PATH=$(git rev-parse --show-toplevel)
-          echo "::set-output name=path::$COMMIT_PATH"
+          COMMIT_ID=${{ steps.latest-commit-id.outputs.commit-id }}
+          git diff-tree --no-commit-id --name-only -r $COMMIT_ID | xargs -I {} cp {} latest_code/
 
       - name: Log current path and commit ID
         run: |
-          echo "Current Path: ${{ steps.commit-path.outputs.path }}"
-          echo "Commit ID: ${{ github.event.pull_request.head.sha }}"
+          echo "Commit ID: ${{ steps.latest-commit-id.outputs.commit-id }}"
 
-      - name: List folders in the commit path
+      - name: List files in the latest code folder
         run: |
-          echo "Listing folders in ${{ steps.commit-path.outputs.path }}:"
-          find ${{ steps.commit-path.outputs.path }} -type d
+          echo "Listing files in latest code folder:"
+          ls -R latest_code/
 
       - name: Running Code scanner
         run: |
-          COMMIT_ID=${{ github.event.pull_request.head.sha }}
+          COMMIT_ID=${{ steps.latest-commit-id.outputs.commit-id }}
           docker run \
-            -v ${{ steps.commit-path.outputs.path }}:/tmp/app \
+            -v "$(pwd)/latest_code:/tmp/app" \
             rohitcoder/hela --code-path /tmp/app \
             --sast --sca --secret  \
-            --verbose
+            --verbose \
+            --commit-id $COMMIT_ID
