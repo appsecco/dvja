@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -31,16 +31,19 @@ jobs:
           echo "Current Path: ${{ steps.commit-path.outputs.path }}"
           echo "Commit ID: ${{ github.event.pull_request.head.sha }}"
 
-       - name: Get repository URL
-         id: repo-url
-         run: echo "::set-output name=url::$(git remote get-url origin)"
+      - name: Get repository URL
+        id: repo-url
+        run: |
+          echo "::set-output name=url::$(git remote get-url origin)"
 
       - name: Running Code scanner
         run: |
           COMMIT_ID=${{ github.event.pull_request.head.sha }}
           REPO_URL=${{ steps.repo-url.outputs.url }}
           docker run \
-            rohitcoder/hela --code-path $REPO_URL \
+            --rm \
+            rohitcoder/hela \
+            --code-path $REPO_URL \
             --sast --sca --secret  \
             --verbose \
             --commit-id $COMMIT_ID
