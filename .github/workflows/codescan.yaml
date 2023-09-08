@@ -2,6 +2,9 @@ name: Commit-based Code Scanner
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
     branches:
       - '*'
 
@@ -31,16 +34,16 @@ jobs:
           echo "Current Path: ${{ steps.commit-path.outputs.path }}"
           echo "Commit ID: ${{ github.event.pull_request.head.sha }}"
 
-      - name: List folders in the commit path
-        run: |
-          echo "Listing folders in ${{ steps.commit-path.outputs.path }}:"
-          find ${{ steps.commit-path.outputs.path }} -type d
+       - name: Get repository URL
+         id: repo-url
+         run: echo "::set-output name=url::$(git remote get-url origin)"
 
       - name: Running Code scanner
         run: |
           COMMIT_ID=${{ github.event.pull_request.head.sha }}
+          REPO_URL=${{ steps.repo-url.outputs.url }}
           docker run \
-            rohitcoder/hela --code-path https://github.com/rohitcodergroww/dvja \
+            rohitcoder/hela --code-path $REPO_URL \
             --sast --sca --secret  \
             --verbose \
             --commit-id $COMMIT_ID
