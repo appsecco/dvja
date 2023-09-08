@@ -40,8 +40,7 @@ jobs:
         run: |
           COMMIT_ID=${{ github.event.pull_request.head.sha }}
           docker run \
-            -v ${{ steps.commit-path.outputs.path }}:/tmp/app \
-            rohitcoder/hela --code-path /tmp/app \
+            rohitcoder/hela --code-path https://github.com/rohitcodergroww/dvja \
             --sast --sca --secret  \
             --verbose \
             --commit-id $COMMIT_ID
