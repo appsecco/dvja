@@ -25,7 +25,7 @@ jobs:
         run: |
           LATEST_COMMIT_ID=${{ steps.latest-commit-id.outputs.commit-id }}
           REPO_URL=${{ steps.repo-url.outputs.url }}
-          docker run --rm -it \
+          docker run --rm \
             rohitcoder/hela \
             --commit-id $LATEST_COMMIT_ID \
             --code-path $REPO_URL \
