@@ -31,7 +31,7 @@ public class UserAction extends BaseController {
     }
 
     public String getLogin() {
-        return login;
+        return login; 
     }
 
     public void setLogin(String login) {
