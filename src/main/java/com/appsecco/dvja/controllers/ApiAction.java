@@ -2,7 +2,6 @@ package com.appsecco.dvja.controllers;
 import com.appsecco.dvja.models.User;
 import com.appsecco.dvja.services.UserService;
 import org.apache.commons.lang.StringUtils;
-
 import javax.servlet.http.Cookie;
 import java.util.ArrayList;
 import java.util.HashMap;
