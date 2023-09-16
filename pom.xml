@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.appsecco</groupId>
@@ -13,95 +12,62 @@
         <struts2.version>2.5.26</struts2.version>
         <log4j2.version>2.14.1</log4j2.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>5.3.10</spring.version>
-        <hibernate.version>3.5.6-Final</hibernate.version>
+        <spring.version>3.2.18.RELEASE</spring.version>
     </properties>
 
     <dependencies>
-        <!-- Struts 2 -->
-             <dependency> 
-                        <groupId>javax.xml.bind</groupId> 
-                        <artifactId>jaxb-api</artifactId> 
-                        <version>2.3.0</version> 
-</dependency>
+
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
             <version>${struts2.version}</version>
         </dependency>
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-annotations</artifactId>
-    <version>3.5.6-Final</version>
-</dependency>
-<dependency>
-    <groupId>commons-lang</groupId>
-    <artifactId>commons-lang</artifactId>
-    <version>2.6</version>
-</dependency>
-<dependency>
-    <groupId>log4j</groupId>
-    <artifactId>log4j</artifactId>
-    <version>1.2.17</version> <!-- Use the version that matches your project's requirements -->
-</dependency>
-<!-- Updated Hibernate Core and Hibernate Commons Annotations -->
 
-<dependency>
-    <groupId>org.hibernate.common</groupId>
-    <artifactId>hibernate-commons-annotations</artifactId>
-    <version>6.0.6.Final</version>
-</dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-web</artifactId>
-    <version>5.3.10</version> <!-- Use the appropriate version -->
-</dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-config-browser-plugin</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
 
-        <!-- Log4j2 -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-junit-plugin</artifactId>
+            <version>${struts2.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
 
-        <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.32</version>
         </dependency>
 
-        <!-- Spring -->
+        <!-- AOP dependency -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
         </dependency>
 
-        <!-- Hibernate -->
-      
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- Servlet API (provided by the container) -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -109,46 +75,77 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Hibernate Annotations -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jgeppert.struts2.bootstrap</groupId>
+            <artifactId>struts2-bootstrap-plugin</artifactId>
+            <version>2.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>3.6.10.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.6.10.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>${hibernate.version}</version>
+            <version>3.5.6-Final</version>
         </dependency>
 
-        <!-- Commons Codec -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
         </dependency>
 
-        <!-- Commons Lang -->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
-        <!-- Gson -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.26</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.9</version>
+            <version>2.8.8</version>
         </dependency>
 
-        <!-- JUnit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -158,19 +155,10 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-            <!-- Maven War Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
-            </plugin>
-
-            <!-- Jetty Maven Plugin -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.43.v20210629</version>
+                <version>9.4.38.v20210224</version>
                 <configuration>
                     <stopKey>CTRL+C</stopKey>
                     <stopPort>8999</stopPort>
