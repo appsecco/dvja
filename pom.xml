@@ -40,11 +40,7 @@
     <version>1.2.17</version> <!-- Use the version that matches your project's requirements -->
 </dependency>
 <!-- Updated Hibernate Core and Hibernate Commons Annotations -->
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>${hibernate.version}</version>
-</dependency>
+
 <dependency>
     <groupId>org.hibernate.common</groupId>
     <artifactId>hibernate-commons-annotations</artifactId>
