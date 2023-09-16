@@ -10,10 +10,11 @@
     <name>dvja</name>
 
     <properties>
-        <struts2.version>2.3.30</struts2.version>
-        <log4j2.version>2.3</log4j2.version>
+        <struts2.version>2.5.26</struts2.version>
+        <log4j2.version>2.14.1</log4j2.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>5.3.10</spring.version>
+        <hibernate.version>5.5.6.Final</hibernate.version>
     </properties>
 
     <dependencies>
@@ -39,7 +40,7 @@
         <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
+            <artifactId>slf4j-api</artifactId>
             <version>1.7.32</version>
         </dependency>
 
@@ -64,25 +65,28 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.5.6-Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-             <version>3.5.6-Final</version>
-
+            <version>${hibernate.version}</version>
         </dependency>
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.1</version> <!-- or the version compatible with your project -->
-        <scope>provided</scope>
-    </dependency>
+
+        <!-- Servlet API (provided by the container) -->
         <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-annotations</artifactId>
-    <version>3.5.6-Final</version>
-</dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Hibernate Annotations -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
 
         <!-- Commons Codec -->
         <dependency>
@@ -90,17 +94,12 @@
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
         </dependency>
-<dependency>
-        <groupId>commons-lang</groupId>
-        <artifactId>commons-lang</artifactId>
-        <version>2.6</version> <!-- or the version you are using -->
-    </dependency>
 
-        <!-- MySQL Connector -->
+        <!-- Commons Lang -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.23</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
 
         <!-- Gson -->
@@ -117,15 +116,11 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-<dependency>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-war-plugin</artifactId>
-    <version>3.4.0</version>
-</dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -135,11 +130,15 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.3.2</version> <!-- Use a compatible version -->
-        </plugin>
+
+            <!-- Maven War Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+
+            <!-- Jetty Maven Plugin -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -163,4 +162,3 @@
         </plugins>
     </build>
 </project>
-
