@@ -46,10 +46,9 @@
     <version>${hibernate.version}</version>
 </dependency>
 <dependency>
-    <groupId>org.hibernate</groupId>
+    <groupId>org.hibernate.common</groupId>
     <artifactId>hibernate-commons-annotations</artifactId>
-        <version>6.0.6.Final</version>
-
+    <version>6.0.6.Final</version>
 </dependency>
 
         <!-- Log4j2 -->
