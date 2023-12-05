@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  maven: circleci/maven@1.4.1
+  snyk: snyk/snyk@1.7.0
+workflows: 
+  snyk With Maven: 
+    jobs:
+      - Build_Maven
+      - Snyk_SCA:
+          requires:
+           - Build_Maven
+      - Snyk_Code:
+         requires:
+          - Snyk_SCA
+jobs:
+  Build_Maven:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    
+    steps:
+      - checkout 
+      - run: mvn clean install
+  Snyk_SCA:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - snyk/install
+      - run:
+          command: |
+            snyk test
+          
+  Snyk_Code:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - snyk/install
+      - run:
+          command: snyk code test
+             
