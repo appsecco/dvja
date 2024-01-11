@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('sonarqube-10.3') {
-                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -Dsonar.host.url=${http://10.10.30.117:9000}"
+                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -Dsonar.host.url=${'http://10.10.30.117:9000'}"
                     }
     }
 }
