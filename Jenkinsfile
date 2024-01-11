@@ -1,6 +1,11 @@
 pipeline {
     agent any
-
+    
+environment {
+        SONARQUBE_SCANNER_HOME = tool 'sonarqube-scanner'
+        SONARQUBE_URL = 'http://10.10.30.117:9000' // Replace with your SonarQube server URL
+    }
+    
     stages {
         stage('SCM') {
             steps {
