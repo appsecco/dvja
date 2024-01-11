@@ -2,7 +2,7 @@ pipeline {
     agent any
     
 environment {
-        SONARQUBE_SCANNER_HOME = tool 'sonarqube-scanner'
+        SONARQUBE_SCANNER_HOME = tool 'sonarqube-10.3'
         SONARQUBE_URL = 'http://10.10.30.117:9000' // Replace with your SonarQube server URL
     }
     
