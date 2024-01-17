@@ -67,5 +67,5 @@ def waitForQualityGate() {
     }
     error "Failed to get SonarQube task details"
 }
-}
+
 }
