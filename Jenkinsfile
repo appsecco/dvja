@@ -31,11 +31,41 @@ environment {
         sh 'cat trufflehog'
       }
     }
-         stage('SonarQube Analysis') {
+       stage('SonarQube Analysis') {
             steps {
-                docker.image('newtmitch/sonar-scanner').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint="" --net jenkins_jenkins') {
-            sh "/usr/local/bin/sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.sources=."
+                script {
+                    // Run SonarQube analysis
+                    docker.image('sonarqube:latest').withRun('-p 9000:9000') { c ->
+                        // Assuming your SonarQube server is running on port 9000
+                        sh "mvn sonar:sonar \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.login=9d291b444b6babf514bcc70457d9c601e07171df"
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    // Check the SonarQube quality gate status
+                    def qualityGate = waitForQualityGate()
+                    if (qualityGate.status != 'OK') {
+                        error "Pipeline aborted due to quality gate failure: ${qualityGate.status}"
+                    }
+                }
+            }
+        }
     }
+}
+
+def waitForQualityGate() {
+    // Reuse taskId if SonarQube version is 8.x or below, otherwise use analysisId
+    def qg = waitForQualityGate()
+    if (qg) {
+        return qg
+    }
+    error "Failed to get SonarQube task details"
 }
             }
          }
