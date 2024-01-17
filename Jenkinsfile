@@ -35,7 +35,7 @@ environment {
             steps {
                 script {
                     // Run SonarQube analysis
-                    docker.image('sonarqube:latest').withRun('-p 9000:9000') { c ->
+                    docker.image('sonarqube:latest').withRun('-p 9000:9000') { 
                         // Assuming your SonarQube server is running on port 9000
                         sh "mvn sonar:sonar \
                             -Dsonar.host.url=http://http://10.10.30.117:9000 \
