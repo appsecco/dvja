@@ -33,8 +33,8 @@ environment {
     }
          stage('SonarQube Analysis') {
             steps {
-                sh 'docker run -d --name sonarqube2 -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9001:9001 sonarqube:latest --json https://github.com/mansib24/dvja.git > sonarqube'
-        sh 'cat sonarqube'
+                docker.image('newtmitch/sonar-scanner').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint="" --net jenkins_jenkins') {
+            sh "/usr/local/bin/sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.sources=."
     }
 }
             }
