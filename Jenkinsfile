@@ -35,8 +35,9 @@ environment {
             steps {
                 script {
                     withSonarQubeEnv('sonarqube-10.3') {
-                     docker.image('newtmitch/sonar-scanner').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
-            sh "--version"   }
+                     docker.image('newtmitch/sonar-scanner').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""') {
+            sh "/usr/local/bin/sonar-scanner --version"
+        }
     }
 }
             }
