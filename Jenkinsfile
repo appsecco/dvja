@@ -33,7 +33,7 @@ environment {
     }
          stage('SonarQube Analysis') {
             steps {
-                sh 'docker run newtmitch/sonarqube --json https://github.com/mansib24/dvja.git > sonarqube'
+                sh 'docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest --json https://github.com/mansib24/dvja.git > sonarqube'
         sh 'cat sonarqube'
     }
 }
