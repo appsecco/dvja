@@ -3,7 +3,7 @@ pipeline {
     
 environment {
         SONARQUBE_SCANNER_HOME = tool 'sonarqube-10.3'
-        SONARQUBE_URL = 'http://10.10.30.117:9000' // Replace with your SonarQube server URL
+        SONARQUBE_URL = 'http://10.10.30.117:9002' // Replace with your SonarQube server URL
     }
     
     stages {
@@ -35,10 +35,10 @@ environment {
             steps {
                 script {
                     // Run SonarQube analysis
-                    docker.image('sonarqube:latest').withRun('-p 9000:9000') { 
-                        // Assuming your SonarQube server is running on port 9000
+                    docker.image('sonarqube:latest').withRun('-p 9002:9002') { 
+                        // Assuming your SonarQube server is running on port 9002
                         sh "mvn sonar:sonar \
-                            -Dsonar.host.url=http://10.10.30.117:9000 \
+                            -Dsonar.host.url=http://10.10.30.117:9002 \
                             -Dsonar.login=9d291b444b6babf514bcc70457d9c601e07171df"
                     }
                 }
